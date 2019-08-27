@@ -16,21 +16,11 @@ const burger = (props) => {
     // console.log(transformedIngredients);
 
     return (
-        // <div>
-        [
-            <div key="lala">lalala</div>,
-            <div key="lolo">lololol</div>,
-            <div key="lulu">lulululul</div>
-        ]
-        // </div>
-
-
-
-        // <div className={classes.Burger}>
-        //     <BurgerIngredient type="bread-top" />
-        //     {transformedIngredients}
-        //     <BurgerIngredient type="bread-bottom" />
-        // </div>
+        <div className={classes.Burger}>
+            <BurgerIngredient type="bread-top" />
+            {transformedIngredients}
+            <BurgerIngredient type="bread-bottom" />
+        </div>
     );
 }
 
