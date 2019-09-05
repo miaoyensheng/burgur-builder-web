@@ -4,7 +4,8 @@ import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
-import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import Backdrop from '../../components/UI/Backdrop/Backdrop';
 
 
 const INGREDIENT_PRICES = {
@@ -39,17 +40,25 @@ class BurgerBuilder extends Component{
         this.setState({purchasable: sum > 0})
     }
 
+    // purchaseHandler = () => {
+    //     this.setState((prevState, props) => {
+    //         return {
+    //             purchasing: !prevState.purchasing
+    //         }
+    //     });   
+    // }
+
     purchaseHandler = () => {
-        this.setState((prevState, props) => {
-            return {
-                purchasing: !prevState.purchasing
-            }
-        });   
+        this.setState({purchasing: true})
     }
 
-    // purchaseHandler = () => {
-    //     this.setState({purchasing: true})
-    // }
+    purchaseCancelHandler = () => {
+        this.setState({purchasing: false})
+    }
+
+    purchaseContinueHandler = () => {
+        alert('You continue!');
+    }
 
     addIngredientHandler = (type) => {
         // const oldCount = this.state.ingredients[type];
@@ -135,9 +144,13 @@ class BurgerBuilder extends Component{
 
         return(
             <Aux>
-                {/* <Modal show={this.state.purchasing}>
-                    <OrderSummary ingredients={this.state.ingredients}/>
-                </Modal> */}
+                <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
+                    <OrderSummary 
+                        purchaseCancelled = {this.purchaseCancelHandler}
+                        purchaseContinued = {this.purchaseContinueHandler}
+                        ingredients={this.state.ingredients}
+                        price={this.state.totalPrice.toFixed(2)}/>
+                </Modal>
                 <Burger ingredients={this.state.ingredients}/>
                 <div>Build Controls</div>
                 <BuildControls 
